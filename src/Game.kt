@@ -38,6 +38,11 @@ fun main(args: Array<String>) {
                     println("Congrats, you have won! \uD83C\uDF7E")
                     running = false
                 }
+                val boardFull = checkBoardFull()
+                if (!playerWon && boardFull) {
+                    println("The game was a draw. No one won!")
+                    running = false
+                }
             }
 
         } catch (e: Exception) {
@@ -89,4 +94,17 @@ fun checkwinner(player: Boolean): Boolean{
 
     }
     return won
+}
+
+fun checkBoardFull(): Boolean {
+    var boardFull = true
+    for (i in 0..2) {
+        for (j in 0..2) {
+            if (board[i][j] == "") {
+                boardFull = false
+                break
+            }
+        }
+    }
+    return boardFull
 }
