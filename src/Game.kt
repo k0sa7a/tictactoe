@@ -1,3 +1,5 @@
+import kotlin.random.Random
+
 var board = arrayListOf<ArrayList<String>>()
 
 fun main(args: Array<String>) {
@@ -42,6 +44,15 @@ fun main(args: Array<String>) {
                 if (!playerWon && boardFull) {
                     println("The game was a draw. No one won!")
                     running = false
+                }
+                if (running) {
+                    placeComputerMove()
+                    printBoard()
+                    val computerWon = checkwinner(false)
+                    if (computerWon) {
+                        println("The computer won the game. Sorry!")
+                        running = false
+                    }
                 }
             }
 
@@ -107,4 +118,14 @@ fun checkBoardFull(): Boolean {
         }
     }
     return boardFull
+}
+
+fun placeComputerMove(){
+    var i = 0
+    var j = 0
+    do {
+        i = Random.nextInt(3)
+        j = Random.nextInt(3)
+    } while (board[i][j] != "")
+    board[i][j] = "O"
 }
